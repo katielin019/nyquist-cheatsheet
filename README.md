@@ -33,7 +33,7 @@ define function my-sum(x, y: 1, z: 2)
   return x + y + z
 ```
 ```LISP
-define function kwdemo(p, scale: 1, vibrato: nil)
+define function keyword-demo(p, scale: 1, vibrato: nil)
   begin
     with s = pluck(p) * scale
     if vibrato then
