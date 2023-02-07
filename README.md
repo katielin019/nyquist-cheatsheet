@@ -4,6 +4,7 @@
 - [pluck-chord.sal](#pluck)
 - [sample.sal](#samp)
 - [functional.sal](#functional)
+- [procedural.sal](#procedural)
 
 ## <a name="pluck"></a>pluck-chord.sal
 ```LISP
@@ -112,4 +113,31 @@ function mysound()
          env(0.05, 0.2, 0.5, 1, 0.5, 0.2)
 
 play mysound()
+```
+
+## <a name="procedural"></a>procedural.sal
+```LISP
+define variable *my-sum*
+
+define function init(x)
+  set *my-sum* = x
+
+define function addx(x)
+  set *my-sum* += x
+
+define function multx(x)
+  set *my-sum* *= x
+```
+```LISP
+define function mysound()
+  begin
+    exec initx(hzosc(440.0) * rrandom())
+    loop for i from 2 to 10
+      exec addx(hzosc(440.0 * i) * rrandom())
+    end
+    exec multx(env(0.05, 0.2, 0.5, 1, 0.5, 0.2))
+  end
+
+exec mysound()
+play *my-sum*
 ```
