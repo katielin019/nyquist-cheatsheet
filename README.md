@@ -1,6 +1,6 @@
 # nyquist-cheatsheet
 
-```SAL
+```LISP
 function pluck-chord(pitch, interval, n)
   begin
     with s = pluck(pitch)
@@ -12,7 +12,7 @@ function pluck-chord(pitch, interval, n)
   end
 ```
 
-```SAL
+```LISP
 play pluck-chord(c3, 5, 2)
 play pluck-chord d3, 7, 4) ~ 3
 play pluck-chord(c2, 10, 7) ~ 8
