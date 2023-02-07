@@ -27,8 +27,23 @@
 - booleans
 
 ## <a name="functions"></a>Functions
+- `define`
+- formal parameters (positional vs. keyword)
+- optional parameters
 
 ## <a name="control"></a>Control Constructs
+- begin-end
+- if then else
+
+### Loop
+- with (local var)
+- stepping vs. stopping
+- repeat expr
+- for var in expr
+- for var from ... to | below | downto | above ... by step-expr
+- while
+- until
+- finally
 
 ## <a name="wavetables"></a>Wavetables
 
