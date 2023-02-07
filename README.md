@@ -1,54 +1,19 @@
 # nyquist-cheatsheet
 
-## Table of Contents
-- [Basic Commands](#basics)
-- [Variables](#variables)
-- [Functions](#functions)
-- [Control Constructs](#control)
-- [Wavetables](#wavetables)
-- [Envelopes](#pwl)
-- [Scores](#scores)
-- [Behaviors (seq, sim)](#behaviors)
+```SAL
+function pluck-chord(pitch, interval, n)
+  begin
+    with s = pluck(pitch)
+    loop
+      for i from 1 below n
+      set s += pluck(pitch + interval * i)
+    end
+    return s
+  end
+```
 
-## <a name="basics"></a>Basics
-- play
-- exec
-- load
-- plot
-- print
-- display
-- set
-- s-save
-
-## <a name="variables"></a>Variables
-- integers, floats, strings
-- symnols
-- lists
-- booleans
-
-## <a name="functions"></a>Functions
-- `define`
-- formal parameters (positional vs. keyword)
-- optional parameters
-
-## <a name="control"></a>Control Constructs
-- begin-end
-- if then else
-
-### Loop
-- with (local var)
-- stepping vs. stopping
-- repeat expr
-- for var in expr
-- for var from ... to | below | downto | above ... by step-expr
-- while
-- until
-- finally
-
-## <a name="wavetables"></a>Wavetables
-
-## <a name="pwl"></a>Envelopes
-
-## <a name="scores"></a>Scores
-
-## <a name="behaviors"></a>Behaviors (seq, sim)
+```SAL
+play pluck-chord(c3, 5, 2)
+play pluck-chord d3, 7, 4) ~ 3
+play pluck-chord(c2, 10, 7) ~ 8
+```
