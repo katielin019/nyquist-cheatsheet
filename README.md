@@ -1,6 +1,11 @@
 # nyquist-cheatsheet
 
-### pluck-chord.sal
+## Table of Contents
+- [pluck-chord.sal](#pluck)
+- [sample.sal](#samp)
+- [functional.sal](#functional)
+
+## <a name="pluck"></a>pluck-chord.sal
 ```LISP
 function pluck-chord(pitch, interval, n)
   begin
@@ -12,19 +17,17 @@ function pluck-chord(pitch, interval, n)
     return s
   end
 ```
-
 ```LISP
 play pluck-chord(c3, 5, 2)
 play pluck-chord d3, 7, 4) ~ 3
 play pluck-chord(c2, 10, 7) ~ 8
 ```
 
-### sample.sal
+## <a name="samp"></a>sample.sal
 ```LISP
 define function my-sum(x, y: 1, z: 2)
   return x + y + z
 ```
-
 ```LISP
 define function kwdemo(p, scale: 1, vibrato: nil)
   begin
@@ -34,7 +37,6 @@ define function kwdemo(p, scale: 1, vibrato: nil)
     return s
   end
 ```
-
 ```LISP
 define function test-range(a-note)
   begin
@@ -47,7 +49,6 @@ define function test-range(a-note)
         return quote(in-range)
   end
 ```
-
 ```LISP
 define function make-list()
   begin
@@ -60,7 +61,6 @@ define function make-list()
     return result
   end
 ```
-
 ```LISP
 define function ten-numbers()
   begin
@@ -70,7 +70,6 @@ define function ten-numbers()
     end
   end
 ```
-
 ```LISP
 set *h* = 15322
 
@@ -99,3 +98,18 @@ define function op-example2()
       finally display "results", a, b, c, d, e, f, g, *h*
     end
   end
+```
+
+## <a name="functional"></a>functional.sal
+```LISP
+function harmonics(hz, n)
+  return simrep(i, n,
+                hzosc(hz * (i + 1)) * rrandom())
+```
+```LISP
+function mysound()
+  return harmonics(440.0, 10) *
+         env(0.05, 0.2, 0.5, 1, 0.5, 0.2)
+
+play mysound()
+```
