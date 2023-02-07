@@ -5,6 +5,9 @@
 - [sample.sal](#samp)
 - [functional.sal](#functional)
 - [procedural.sal](#procedural)
+- [wavetable-test.sal](#wavetable)
+- [score-intro.sal](#scoreintro)
+- [random-song.sal](#randsong)
 
 ## <a name="pluck"></a>pluck-chord.sal
 ```LISP
@@ -141,3 +144,77 @@ define function mysound()
 exec mysound()
 play *my-sum*
 ```
+
+## <a name="wavetable"></a>wavetable-test.sal
+```LISP
+define variable *mytable* =
+                sim(0.5 * build-harmonic(1, 2048),
+                    0.25 * build-harmonic(2, 2048),
+                    0.125 * build-harmonic(3, 2048),
+                    0.062 * build-harmonic(4, 2048))
+
+set *mytable* = list(*mytable*, hz-to-step(1), #t)
+
+play osc(c2, 4, *mytable*) * pwl(1, 1, 4)
+```
+```LISP
+function note(p)
+  begin
+    display "note", p
+    return osc(p, 4, *mytable*) * pwl(1, 1, 4)
+  end
+
+play note(c2)
+play sim(note(c2), note(g2) @ 1.5, note(as2) @ 2.75)
+```
+
+## <a name="scoreintro"></a>score-intro.sal
+```LISP
+function my-note(pitch: 60, vel: 100)
+  begin
+    return pluck(pitch) * vel * 0.01
+  end
+
+set my-score = {
+  {0 0 {score-begin-end 0 5}}
+  {0.0 1.0 {my-note pitch: 60 vel: 100}}
+  {1.0 2.0 {my-note pitch: 62 vel: 110}}
+  {2.0 1.0 {my-note pitch: 64 vel: 120}}}
+
+play timed-seq(my-score)
+```
+```LISP
+play timed-seq(score-append(my-score,
+        score-transpose(my-score, keyword(pitch), 12))
+
+play timed-seq(score-merge(my-score,
+        score-shift(my-score, 0.1),
+        score-shift(my-score, 0.2)))
+```
+
+## <a name="randsong"></a>random-song.sal
+```LISP
+function build-sound-expr()
+  return list(quote(my-note),
+              keyword(pitch), 60 + random(12),
+              keyword(vel), 30 + 10 * random(7))
+```
+```LISP
+function build-sound-event(start-time)
+  return list(start-time, 0.25, build-sound-expr())
+```
+```LISP
+function build-score(score, start-time, dur)
+  begin
+    if (start-time < 0.0) then
+      return cons(list(0, 0,
+                       list(quote(score-begin-end), 0, dur)), score)
+    else
+      return build-score(cons(build-sound-event(start-time), score),
+                         start-time - 0.25, dur)
+  end
+```
+```LISP
+set random-song = build-score({}, 2.75, 3)
+exec score-print(random-song)
+play timed-seq(random-song)
