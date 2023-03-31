@@ -1,6 +1,7 @@
 # nyquist-cheatsheet
 
 ## Table of Contents
+- [SAL vs. Lisp](#sal-lisp)
 - [pluck-chord.sal](#pluck)
 - [sample.sal](#samp)
 - [functional.sal](#functional)
@@ -8,6 +9,9 @@
 - [wavetable-test.sal](#wavetable)
 - [score-intro.sal](#scoreintro)
 - [random-song.sal](#randsong)
+
+## <a name="sal-lisp"></a>SAL vs. Lisp
+SAL and Lisp are the two programming languages offered by Nyquist. The semantics of SAL are based on Lisp, but it was designed and implemented as an alternative option that may be more familiar and easy-to-use, syntax-wise, for some.
 
 ## <a name="pluck"></a>pluck-chord.sal
 ```LISP
